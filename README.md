@@ -8,6 +8,7 @@ This demo app is made by Gradio.
 ```bash
 gradio app.py
 ```
+and, access to http://localhost:7860/
 
 ![](./materials/cobalt-gradio-demo.png)
 
