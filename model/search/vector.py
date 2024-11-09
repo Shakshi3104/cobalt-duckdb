@@ -96,6 +96,21 @@ class RuriVoyagerSearchClient(BaseSearchClient):
     @classmethod
     @stop_watch
     def from_dataframe(cls, _data: pd.DataFrame, _target: str):
+        """
+        検索ドキュメントのpd.DataFrameから初期化する
+
+        Parameters
+        ----------
+        _data:
+            pd.DataFrame, 検索対象のDataFrame
+
+        _target:
+            str, 検索対象のカラム名
+
+        Returns
+        -------
+
+        """
         logger.info("🚦 [RuriVoyagerSearchClient] Initialize from DataFrame")
 
         search_field = _data[_target]
