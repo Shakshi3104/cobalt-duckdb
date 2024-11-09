@@ -47,4 +47,4 @@ if __name__ == "__main__":
 
     # App launch
     search_interface.queue()
-    search_interface.launch()
+    search_interface.launch(server_name="0.0.0.0")
