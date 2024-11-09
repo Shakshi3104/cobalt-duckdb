@@ -12,11 +12,11 @@ from loguru import logger
 from tqdm import tqdm
 
 import sentence_transformers as st
-from sentence_transformers import util as st_util
 
 import voyager
 
 from model.search.base import BaseSearchClient
+from model.utils.timer import stop_watch
 
 
 def array_to_string(array: np.ndarray) -> str:
@@ -94,6 +94,7 @@ class RuriVoyagerSearchClient(BaseSearchClient):
         self.index = index
 
     @classmethod
+    @stop_watch
     def from_dataframe(cls, _data: pd.DataFrame, _target: str):
         logger.info("🚦 [RuriVoyagerSearchClient] Initialize from DataFrame")
 
@@ -120,6 +121,7 @@ class RuriVoyagerSearchClient(BaseSearchClient):
 
         return cls(_data, _target, index, embedder)
 
+    @stop_watch
     def search_top_n(self, _query: Union[List[str], str], n: int = 10) -> List[pd.DataFrame]:
         """
         クエリに対する検索結果をtop-n個取得する

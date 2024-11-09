@@ -11,6 +11,7 @@ from rank_bm25 import BM25Okapi
 
 from model.search.base import BaseSearchClient
 from model.utils.tokenizer import MeCabTokenizer
+from model.utils.timer import stop_watch
 
 
 class BM25Wrapper(BM25Okapi):
@@ -105,6 +106,7 @@ class BM25SearchClient(BaseSearchClient):
         bm25 = BM25Wrapper(_data, "tokenized")
         return cls(bm25, corpus_tokenized)
 
+    @stop_watch
     def search_top_n(self, _query: Union[List[str], str], n: int = 10) -> List[pd.DataFrame]:
         """
         クエリに対する検索結果をtop-n個取得する
