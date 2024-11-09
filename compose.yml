@@ -1,0 +1,12 @@
+services:
+  cobalt:
+    container_name: cobalt-hybrid-search
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "7860:7860"
+    volumes:
+      - type: bind
+        source: ./model
+        target: /model
