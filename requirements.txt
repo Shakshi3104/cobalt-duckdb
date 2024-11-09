@@ -9,9 +9,7 @@ tqdm
 python-dotenv
 
 # Visualization
-streamlit>=1.24
-st-pages
-streamlit-webrtc
+gradio
 
 tqdm>=4.65
 matplotlib>=3.7
@@ -25,8 +23,6 @@ pandas>=2.0
 opencv-python>=4.8
 pillow>=9.5
 
-# LLM
-
 # Others
 python-magic==0.4.27
 emoji>=2.6.0
@@ -39,6 +35,7 @@ voyager
 mecab-python3
 unidic-lite
 fugashi
+sentencepiece
 sentence-transformers>=3.0
 
 # Notion
