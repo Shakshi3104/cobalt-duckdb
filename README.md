@@ -6,7 +6,7 @@ Cobalt is a demo app for hybrid search with vector and surface search using [Rur
 This demo app is made by Gradio.
 
 ```bash
-gradio app.py
+docker compose up --build
 ```
 and, access to http://localhost:7860/
 
