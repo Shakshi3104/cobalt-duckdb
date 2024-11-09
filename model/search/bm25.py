@@ -134,13 +134,12 @@ class BM25SearchClient(BaseSearchClient):
         # ランキングtop-nをクエリ毎に取得
         result = []
         for query in tqdm(query_tokens):
-            query_text = "".join(query)
             df_res = self.model.get_top_n(query, self.corpus, n)
-            df_res["query"] = [query_text] * len(df_res)
+            # ランク
             df_res["rank"] = deepcopy(df_res.reset_index()).index
             df_res = df_res.drop(columns=["tokenized"])
             result.append(df_res)
 
         logger.success(f"🚦 [BM25SearchClient] Executed")
-        
+
         return result
