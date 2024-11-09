@@ -5,6 +5,7 @@
 # Develop
 .venv/
 logs/
+data/
 
 # Default
 # Byte-compiled / optimized / DLL files
