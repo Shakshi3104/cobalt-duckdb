@@ -13,7 +13,9 @@ pinned: false
 Cobalt is a demo app for hybrid search with vector and surface search using [Ruri](https://huggingface.co/cl-nagoya/ruri-large), [BM25](https://github.com/dorianbrown/rank_bm25) and [Voyager](https://spotify.github.io/voyager/). The name cobalt is derived from the word 瑠璃 (Ruri), which refers to cobalt glass.
 
 ## Demo
-This demo app is made by Gradio.
+This demo app is made by Gradio, deployed to [Hugging Face Space](https://huggingface.co/spaces/Shakshi3104/Cobalt).
+
+On local, you can run this app below:
 
 ```bash
 docker compose up --build
