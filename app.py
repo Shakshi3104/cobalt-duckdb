@@ -27,9 +27,11 @@ if __name__ == "__main__":
         gr.Markdown("""
         # 💎 Cobalt
         Demo app for hybrid search with vector and surface search using [Ruri](https://huggingface.co/cl-nagoya/ruri-large), [BM25](https://github.com/dorianbrown/rank_bm25) and [Voyager](https://spotify.github.io/voyager/).
+        
+        You can search ARASHI's songs with rap lyrics by Sho Sakurai.
         """)
         # Input query
-        search_query = gr.Textbox(label="Query", submit_btn=True)
+        search_query = gr.Textbox(label="Sakurap Words", submit_btn=True)
 
         gr.Markdown("""
         ## Search Results
