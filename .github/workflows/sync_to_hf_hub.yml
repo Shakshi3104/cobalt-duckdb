@@ -12,6 +12,8 @@ jobs:
         with:
           fetch-depth: 0
           lfs: true
+      - name: Check branch name
+        run: git branch
       - name: Push to hub
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
