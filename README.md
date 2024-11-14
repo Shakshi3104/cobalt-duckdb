@@ -4,7 +4,7 @@ title: Cobalt
 sdk: gradio
 emoji: 💎
 colorFrom: blue
-colorTo: white
+colorTo: indigo
 pinned: false
 ---
 
