@@ -13,7 +13,7 @@ from tqdm import tqdm
 
 import sentence_transformers as st
 
-import voyager
+import duckdb
 
 from model.search.base import BaseSearchClient
 from model.utils.timer import stop_watch
@@ -80,7 +80,7 @@ class RuriEmbedder:
 
 class RuriVoyagerSearchClient(BaseSearchClient):
     def __init__(self, dataset: pd.DataFrame, target: str,
-                 index: voyager.Index,
+                 vector_store_name: str,
                  model: RuriEmbedder):
         load_dotenv()
         # オリジナルのコーパス
@@ -90,8 +90,8 @@ class RuriVoyagerSearchClient(BaseSearchClient):
         # 埋め込みモデル
         self.embedder = model
 
-        # Voyagerインデックス
-        self.index = index
+        # DuckDBのテーブル名
+        self.vector_store_name = vector_store_name
 
     @classmethod
     @stop_watch
@@ -129,12 +129,12 @@ class RuriVoyagerSearchClient(BaseSearchClient):
         num_dim = embeddings.shape[1]
         logger.debug(f"🚦⚓️ [RuriVoyagerSearchClient] Number of dimensions of Embedding vector is {num_dim}")
 
-        # Voyagerのインデックスを初期化
-        index = voyager.Index(voyager.Space.Cosine, num_dimensions=num_dim)
-        # indexにベクトルを追加
-        _ = index.add_items(embeddings)
+        # DuckDBに挿入
+        vector_store_name = "ruri_vector_index"
+        vdb = pd.DataFrame({"index": range(len(embeddings)), "embedding": embeddings.tolist()})
+        duckdb.register(vector_store_name, vdb)
 
-        return cls(_data, _target, index, embedder)
+        return cls(_data, _target, vector_store_name,embedder)
 
     @stop_watch
     def search_top_n(self, _query: Union[List[str], str], n: int = 10) -> List[pd.DataFrame]:
@@ -169,11 +169,19 @@ class RuriVoyagerSearchClient(BaseSearchClient):
         # ランキングtop-nをクエリ毎に取得
         result = []
         for embeddings_query in tqdm(embeddings_queries):
-            # Voyagerのインデックスを探索
-            neighbors_indices, distances = self.index.query(embeddings_query, k=n)
+            num_dim = len(embeddings_query)
+            distance = duckdb.sql(f"""
+            select
+                index, 
+                array_cosine_distance(embedding::DOUBLE[{num_dim}], {embeddings_query.tolist()}::DOUBLE[{num_dim}]) as distance
+            from {self.vector_store_name}
+            order by distance
+            limit {n}
+            """).df()
+
             # 類似度スコア
-            df_res = deepcopy(self.dataset.iloc[neighbors_indices])
-            df_res["score"] = distances
+            df_res = deepcopy(self.dataset.iloc[distance["index"].tolist()])
+            df_res["score"] = distance["distance"].tolist()
             # ランク
             df_res["rank"] = deepcopy(df_res.reset_index()).index
 

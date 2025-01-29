@@ -10,6 +10,7 @@ python-dotenv
 
 # Visualization
 gradio
+streamlit
 
 tqdm>=4.65
 matplotlib>=3.7
@@ -30,6 +31,7 @@ emoji>=2.6.0
 # search
 rank_bm25
 voyager
+duckdb
 
 # NLP
 mecab-python3
