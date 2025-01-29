@@ -1,6 +1,6 @@
 services:
   cobalt:
-    container_name: cobalt-hybrid-search
+    container_name: cobalt-duckdb
     build:
       context: .
       dockerfile: Dockerfile

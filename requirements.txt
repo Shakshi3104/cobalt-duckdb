@@ -10,7 +10,6 @@ python-dotenv
 
 # Visualization
 gradio
-streamlit
 
 tqdm>=4.65
 matplotlib>=3.7
