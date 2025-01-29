@@ -30,6 +30,7 @@ emoji>=2.6.0
 # search
 rank_bm25
 voyager
+duckdb
 
 # NLP
 mecab-python3
