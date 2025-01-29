@@ -1,11 +1,11 @@
 import gradio as gr
 import pandas as pd
 
-from model.search.vector import RuriVoyagerSearchClient
+from model.search.vector import RuriDuckDBSearchClient
 from model.data.notion_db import fetch_sakurap_corpus
 
 
-def search(search_client: RuriVoyagerSearchClient):
+def search(search_client: RuriDuckDBSearchClient):
     def _search(query: str) -> pd.DataFrame:
         results = search_client.search_top_n(query)
         result = results[0]
@@ -21,7 +21,7 @@ if __name__ == "__main__":
     # Load dataset
     sakurap_df = fetch_sakurap_corpus("./data/sakurap_corpus.csv")
     # Initialize search client
-    search_client = RuriVoyagerSearchClient.from_dataframe(sakurap_df, "content")
+    search_client = RuriDuckDBSearchClient.from_dataframe(sakurap_df, "content")
 
     with gr.Blocks() as search_interface:
         gr.Markdown("""

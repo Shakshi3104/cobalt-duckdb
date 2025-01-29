@@ -78,7 +78,7 @@ class RuriEmbedder:
         return embedding
 
 
-class RuriVoyagerSearchClient(BaseSearchClient):
+class RuriDuckDBSearchClient(BaseSearchClient):
     def __init__(self, dataset: pd.DataFrame, target: str,
                  vector_store_name: str,
                  model: RuriEmbedder):
