@@ -10,7 +10,7 @@ pinned: false
 
 # Cobalt DuckDB
 
-Cobalt is a demo app for vector search using [Ruri](https://huggingface.co/cl-nagoya/ruri-large) and DuckDB. The repository is a demo app similar to [cobalt-hybrid-search](https://github.com/Shakshi3104/cobalt-hybrid-search).
+Cobalt DuckDB is a demo app for vector search using [Ruri](https://huggingface.co/cl-nagoya/ruri-large) and DuckDB. The repository is a demo app similar to [cobalt-hybrid-search](https://github.com/Shakshi3104/cobalt-hybrid-search).
 
 ## Requirements
 
