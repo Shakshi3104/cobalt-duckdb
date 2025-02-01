@@ -3,7 +3,7 @@ license: mit
 title: Cobalt DuckDB
 sdk: gradio
 emoji: 🦆
-colorFrom: blue
+colorFrom: yellow
 colorTo: indigo
 pinned: false
 ---
